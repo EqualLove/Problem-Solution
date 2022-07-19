@@ -1,0 +1,17 @@
+다른 도메인의 이미지를 가져와 canvas에 그리게 되면
+cors를 통과하지 못할경우 나머지 행동도 전부 무시하게 된다.
+따라서 이미지를 가져오지 못해 그리는것도 문제가 있다.
+
+여기에는 몇가지 해결방법이있는데
+1.img tag crossorigin anonymous로 설정
+=>매우 효과적이고 간단하지만 캐시에 남아있을 경우 기존처럼 ctrl+F5를 통해 캐시를 지워줘야할 필요가있다
+
+2.서버에서 헤더 추가
+=>일부의 경우에는 http_origin값을 가지고 있지 않은경우가 있어
+사실상 사용이 불가하다
+
+3.crossorigin anonymous로 설정 한 뒤 img src 변경
+=>호출할때 뒤에 추가로 값을주어 캐싱된 이미지를 가져오지 않게끔하여 회피
+img.src = image_source+'?';
+혹은
+img.src = image_source+'?v='+new Date().getTime();
